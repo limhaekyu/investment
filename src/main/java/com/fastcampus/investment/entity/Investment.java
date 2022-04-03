@@ -1,18 +1,45 @@
 package com.fastcampus.investment.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
+@Table(name = "investment")
 @Entity
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Investment {
 
     @Id
-    @Column
+    @Column(name = "investment_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @JsonManagedReference
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    @JsonManagedReference
+    private Product product;
+
+    @Column(name = "investment_amount")
+    private Long investmentAmount;
+
+    @Column(name = "investment_status")
+    private InvestmentStatus investmentStatus = InvestmentStatus.INVESTMENT_POSSIBAL;
+
+    @Column(name = "investment_at")
+    private LocalDateTime investmentAt = LocalDateTime.now();
+
+
+
+
 }
