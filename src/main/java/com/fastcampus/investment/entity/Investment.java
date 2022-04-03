@@ -21,9 +21,9 @@ public class Investment {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "invester_id")
     @JsonManagedReference
-    private User user;
+    private Invester invester;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
