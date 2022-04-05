@@ -25,10 +25,10 @@ public class Invester {
     private String investerName;
 
     @Column(name = "holding_amount")
-    private Long holdingAmount;
+    private Long holdingAmount=0L;
 
     @Column(name ="total_personal_investment_amount")
-    private Long totalPersonalInvestmentAmount;
+    private Long totalPersonalInvestmentAmount=0L;
 
     @JsonBackReference
     @OneToMany(mappedBy = "invester", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

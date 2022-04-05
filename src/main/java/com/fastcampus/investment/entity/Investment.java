@@ -31,7 +31,7 @@ public class Investment {
     private Product product;
 
     @Column(name = "investment_amount")
-    private Long investmentAmount;
+    private Long investmentAmount=0L;
 
     @Column(name = "investment_status")
     private InvestmentStatus investmentStatus = InvestmentStatus.INVESTMENT_POSSIBAL;
