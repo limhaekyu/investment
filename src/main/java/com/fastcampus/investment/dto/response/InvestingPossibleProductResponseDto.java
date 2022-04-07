@@ -5,7 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor
@@ -17,8 +18,8 @@ public class InvestingPossibleProductResponseDto {
     private Long totalInvestAmount;
     private Integer investedCount;
     private Long investedAmount;
-    private LocalDateTime startedAt;
-    private LocalDateTime finishedAt;
+    private LocalDate startedAt;
+    private LocalDate finishedAt;
 
     public static InvestingPossibleProductResponseDto fromEntity(Product product){
         return InvestingPossibleProductResponseDto.builder()

@@ -19,7 +19,7 @@ public class Apis {
     private final ProductService productService;
 
     @GetMapping("/product")
-    public ApiResponseDto<List<InvestingPossibleProductResponseDto>> searchProduct(){
+    public ApiResponseDto<List<InvestingPossibleProductResponseDto>> searchPossibleProduct(){
         List<InvestingPossibleProductResponseDto> productList = productService.getSearchPossibleProducts();
         System.out.println(productList);
         return ApiResponseDto.of(productList);

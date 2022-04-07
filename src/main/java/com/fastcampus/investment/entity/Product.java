@@ -4,10 +4,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,10 +35,10 @@ public class Product {
     private int investedCount;
 
     @Column(name = "started_at")
-    private LocalDateTime startedAt;
+    private LocalDate startedAt;
 
     @Column(name = "finished_at")
-    private LocalDateTime finishedAt;
+    private LocalDate finishedAt;
 
     @JsonBackReference
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
