@@ -35,9 +35,9 @@ public class Investment {
     @Column(name = "investment_amount", columnDefinition = "long default 0L")
     private Long investmentAmount;
 
-    @Column(name = "investment_status", columnDefinition = "varChar(32) default 'IN_INVESTMENT'")
+    @Column(name = "investment_status", columnDefinition = "varChar(32) default 'INVESTED'")
     @Enumerated(EnumType.STRING)
-    private InvestmentStatus investmentStatus = InvestmentStatus.IN_INVESTMENT;
+    private InvestmentStatus investmentStatus = InvestmentStatus.INVESTED;
 
     @Column(name = "investment_at")
     private LocalDate investmentAt = LocalDate.now();

@@ -31,15 +31,21 @@ public class ProductService {
                 ()-> new IllegalArgumentException("상품이 없습니다.")
         );
 
-        InsertInvestmentReactProductRequestDto insertInvestmentReactProductRequestDto = InsertInvestmentReactProductRequestDto.builder()
-                .productId(investmentRequestDto.getProductId())
-                .investedCount(product.getInvestedCount()+1)
-                .investmentAmount(product.getInvestedAmount()+ investmentRequestDto.getInvestmentAmount())
-                .build();
+        if(product.getTotalInvestAmount()-product.getInvestedAmount()- investmentRequestDto.getInvestmentAmount() > 0){
 
-        product.insertInvestmentReactProduct(insertInvestmentReactProductRequestDto);
+            InsertInvestmentReactProductRequestDto insertInvestmentReactProductRequestDto = InsertInvestmentReactProductRequestDto.builder()
+                    .productId(investmentRequestDto.getProductId())
+                    .investedCount(product.getInvestedCount()+1)
+                    .investmentAmount(product.getInvestedAmount()+ investmentRequestDto.getInvestmentAmount())
+                    .build();
 
-        return product;
+            product.insertInvestmentReactProduct(insertInvestmentReactProductRequestDto);
+
+            return product;
+        } else{
+            return null;
+        }
 
     }
+
 }
