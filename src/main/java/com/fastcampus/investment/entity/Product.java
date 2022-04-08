@@ -1,5 +1,7 @@
 package com.fastcampus.investment.entity;
 
+import com.fastcampus.investment.dto.request.InsertInvestmentReactProductRequestDto;
+import com.fastcampus.investment.dto.request.InvestmentRequestDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,10 +31,10 @@ public class Product {
     private Long totalInvestAmount;
 
     @Column(name = "invested_amount", columnDefinition = "long default 0L")
-    private Long InvestedAmount;
+    private Long investedAmount;
 
     @Column(name = "invested_count", columnDefinition = "integer default 0")
-    private int investedCount;
+    private Integer investedCount;
 
     @Column(name = "started_at")
     private LocalDate startedAt;
@@ -43,4 +45,10 @@ public class Product {
     @JsonBackReference
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Investment> investment = new ArrayList<>();
+
+    public void insertInvestmentReactProduct(InsertInvestmentReactProductRequestDto insertInvestmentReactProductRequestDto){
+        this.id = insertInvestmentReactProductRequestDto.getProductId();
+        this.investedCount = insertInvestmentReactProductRequestDto.getInvestedCount();
+        this.investedAmount = insertInvestmentReactProductRequestDto.getInvestmentAmount();
+    }
 }

@@ -1,12 +1,14 @@
 package com.fastcampus.investment.entity;
 
+import com.fastcampus.investment.dto.request.InvestmentRequestDto;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Table(name = "investment")
 @Entity
@@ -21,25 +23,30 @@ public class Investment {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "invester_id")
+    @JoinColumn(name = "investor_id")
     @JsonManagedReference
-    private Invester invester;
+    private Investor investor;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     @JsonManagedReference
     private Product product;
 
-    @Column(name = "investment_amount")
-    private Long investmentAmount=0L;
+    @Column(name = "investment_amount", columnDefinition = "long default 0L")
+    private Long investmentAmount;
 
-    @Column(name = "investment_status")
-    private InvestmentStatus investmentStatus = InvestmentStatus.INVESTMENT_POSSIBAL;
+    @Column(name = "investment_status", columnDefinition = "varChar(32) default 'IN_INVESTMENT'")
+    @Enumerated(EnumType.STRING)
+    private InvestmentStatus investmentStatus = InvestmentStatus.IN_INVESTMENT;
 
     @Column(name = "investment_at")
-    private LocalDateTime investmentAt = LocalDateTime.now();
+    private LocalDate investmentAt = LocalDate.now();
 
+    public void insertInvestment(Long investmentAmount, Investor investor, Product product){
+        this.investmentAmount = investmentAmount;
+        this.investor = investor;
+        this.product = product;
 
-
+    }
 
 }

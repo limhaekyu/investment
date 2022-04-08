@@ -13,25 +13,19 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Table(name = "invester")
-public class Invester {
+@Table(name = "investor")
+public class Investor {
 
     @Id
-    @Column(name = "invester_id")
+    @Column(name = "investor_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "invester_name")
-    private String investerName;
-
-    @Column(name = "holding_amount")
-    private Long holdingAmount=0L;
-
-    @Column(name ="total_personal_investment_amount")
-    private Long totalPersonalInvestmentAmount=0L;
+    @Column(name = "investor_name")
+    private String name;
 
     @JsonBackReference
-    @OneToMany(mappedBy = "invester", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "investor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Investment> investment = new ArrayList<>();
 
 

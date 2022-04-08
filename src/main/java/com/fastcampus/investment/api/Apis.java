@@ -1,8 +1,9 @@
 package com.fastcampus.investment.api;
 
+import com.fastcampus.investment.dto.request.InvestmentRequestDto;
 import com.fastcampus.investment.dto.response.InvestingPossibleProductResponseDto;
-import com.fastcampus.investment.entity.Product;
 import com.fastcampus.investment.global.ApiResponseDto;
+import com.fastcampus.investment.service.InvestmentService;
 import com.fastcampus.investment.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ public class Apis {
     // TODO: start
 
     private final ProductService productService;
+    private final InvestmentService investmentService;
 
     @GetMapping("/product")
     public ApiResponseDto<List<InvestingPossibleProductResponseDto>> searchPossibleProduct(){
@@ -26,8 +28,23 @@ public class Apis {
     }
 
     @PostMapping("/investment")
-    public void postInvestment(){
+    public void insertInvestment(@RequestHeader("X-USER-ID") Long investorId, @RequestParam("productId") Long productId,
+                                 @RequestParam("investAmount") Long investAmount){
 
+        InvestmentRequestDto investmentRequestDto = InvestmentRequestDto.builder()
+                .investorId(investorId)
+                .productId(productId)
+                .investmentAmount(investAmount)
+                .build();
+
+        investmentService.insertInvestment(investmentRequestDto);
+
+
+    }
+
+    @GetMapping("/investment")
+    public ApiResponseDto<InvestingPossibleProductResponseDto> getInvestment(){
+        return null;
     }
 
     @PutMapping("/investment/{id}")

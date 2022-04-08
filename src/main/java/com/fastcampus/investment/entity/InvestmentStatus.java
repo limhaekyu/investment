@@ -1,6 +1,6 @@
 package com.fastcampus.investment.entity;
 
 public enum InvestmentStatus {
-    INVESTMENT_POSSIBAL, // 투자가능
+    IN_INVESTMENT, // 투자중
     CANCELED             // 취소
 }
