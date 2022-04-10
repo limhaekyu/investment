@@ -26,6 +26,7 @@ public class ProductService {
 
     }
 
+    @Transactional
     public Product insertInvestmentReactProduct(InvestmentRequestDto investmentRequestDto){
         Product product = productRepository.findById(investmentRequestDto.getProductId()).orElseThrow(
                 ()-> new IllegalArgumentException("상품이 없습니다.")

@@ -12,12 +12,13 @@ public class InvestorService {
 
     private final InvestorRepository investorRepository;
 
-    public Investor insertInvestmentReactInvestor(InvestmentRequestDto investmentRequestDto){
+    public Investor searchInvestor(Long investorId){
 
-        Investor investor = investorRepository.findById(investmentRequestDto.getInvestorId()).orElseThrow(
+        Investor investor = investorRepository.findById(investorId).orElseThrow(
                 ()-> new IllegalArgumentException("투자자가 없습니다.")
         );
-
         return investor;
     }
+
+
 }

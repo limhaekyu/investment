@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
+
     @Query("select p from Product p where current_date >= p.startedAt and current_date < p.finishedAt")
     List<Product> findAllByInvestingPossibleProduct();
 

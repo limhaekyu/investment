@@ -10,11 +10,12 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Table(name = "investment")
+
 @Entity
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "investment")
 public class Investment {
 
     @Id
@@ -27,7 +28,7 @@ public class Investment {
     @JsonManagedReference
     private Investor investor;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
     @JsonManagedReference
     private Product product;
@@ -42,11 +43,16 @@ public class Investment {
     @Column(name = "investment_at")
     private LocalDate investmentAt = LocalDate.now();
 
-    public void insertInvestment(Long investmentAmount, Investor investor, Product product){
+    public void insertInvestmentSuccess(Long investmentAmount, Investor investor, Product product){
         this.investmentAmount = investmentAmount;
         this.investor = investor;
         this.product = product;
-
     }
 
+    public void insertInvestmentFail(Long investmentAmount, Investor investor, Product product, InvestmentStatus investmentStatus){
+        this.investmentAmount = investmentAmount;
+        this.investor = investor;
+        this.product = product;
+        this.investmentStatus = investmentStatus;
+    }
 }

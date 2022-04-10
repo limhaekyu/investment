@@ -1,13 +1,16 @@
 package com.fastcampus.investment.api;
 
 import com.fastcampus.investment.dto.request.InvestmentRequestDto;
+import com.fastcampus.investment.dto.response.InvestedProductResponseDto;
 import com.fastcampus.investment.dto.response.InvestingPossibleProductResponseDto;
+import com.fastcampus.investment.entity.Investor;
 import com.fastcampus.investment.global.ApiResponseDto;
 import com.fastcampus.investment.service.InvestmentService;
 import com.fastcampus.investment.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,6 +26,7 @@ public class Apis {
     @GetMapping("/product")
     public ApiResponseDto<List<InvestingPossibleProductResponseDto>> searchPossibleProduct(){
         List<InvestingPossibleProductResponseDto> productList = productService.getSearchPossibleProducts();
+
         System.out.println(productList);
         return ApiResponseDto.of(productList);
     }
@@ -37,14 +41,17 @@ public class Apis {
                 .investmentAmount(investAmount)
                 .build();
 
-        investmentService.insertInvestment(investmentRequestDto);
+         investmentService.insertInvestment(investmentRequestDto);
 
 
     }
 
     @GetMapping("/investment")
-    public ApiResponseDto<InvestingPossibleProductResponseDto> getInvestment(){
-        return null;
+    public ApiResponseDto<List<InvestedProductResponseDto>> searchInvestmentList(@RequestHeader("X-USER-ID") Long investorId){
+
+        List<InvestedProductResponseDto> investedProductList = investmentService.getSearchInvestment(investorId);
+        System.out.println(investedProductList);
+        return ApiResponseDto.of(investedProductList);
     }
 
     @PutMapping("/investment/{id}")
